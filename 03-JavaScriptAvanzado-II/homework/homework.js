@@ -13,9 +13,9 @@ const otroContador = counter()
 otroContador()      // 1
 otroContador()      // 2 */
 function counter() {
-  var count = 1;
+  var count = 0;
   function algo() {
-    return count++;
+    return ++count;
   }
   return algo;
 }
