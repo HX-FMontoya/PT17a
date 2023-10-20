@@ -9,7 +9,6 @@ nFibonacci(n) debe retornar el enésimo número de la secuencia de Fibonacci, to
 Ejemplo: nFibonacci(7) retornará 13, ya que 13 es el dígito que está en la posición 7 de la secuencia.
 
 Secuencia:  0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ... 
-                                  
 
 Como ejercicio adicional y completamente opcional, al terminar de resolver este problema pueden intentar definir funciones que logren los mismos resultados pero de manera iterativa.
 */

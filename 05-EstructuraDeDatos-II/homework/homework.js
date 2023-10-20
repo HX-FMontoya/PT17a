@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /* EJERCICIO 1
 Implementar la clase LinkedList, definiendo los siguientes métodos:
@@ -10,9 +10,128 @@ Implementar la clase LinkedList, definiendo los siguientes métodos:
   search(isEven), donde isEven es una función que retorna true cuando recibe por parámetro un número par, busca un nodo cuyo valor sea un número par.
   En caso de que la búsqueda no arroje resultados, search debe retornar null.
 */
-function LinkedList() {}
+// Notacion de clase
+/* class Node {
+  constructor(value) {
+    this.value = value
+    this.next = null
+  }
+}
 
-function Node(value) {}
+class LinkedList {
+  constructor() { 
+    this.head = null
+  }
+  add(){}
+} */
+// Notacion funcional
+function Node(value) {
+  this.value = value;
+  this.next = null;
+}
+
+function LinkedList() {
+  this.head = null;
+}
+
+// linkedlist -> this, proto
+
+//! Metodos
+//? Add
+LinkedList.prototype.add = function (value) {
+  // creamos el nodo
+  const nodo = new Node(value);
+  // guardamos el nodo
+  // 1. verificar el head
+  if (!this.head) {
+    this.head = nodo;
+    return nodo;
+  }
+  // 2. Si el head ya tiene valor, tengo que recorrer el next
+  let current = this.head;
+  console.log(current); // Node -> {value, next: Node: { next}}
+  // Recorrer la lista
+  while (current.next) {
+    current = current.next;
+  }
+  current.next = nodo;
+  return nodo;
+};
+
+LinkedList.prototype.remove = function () {
+  if (!this.head) return null;
+  if (!this.head.next) {
+    let n = this.head.value;
+    this.head = null;
+    return n;
+  }
+  let current = this.head;
+  while (current.next.next) {
+    current = current.next;
+  }
+  let nodo = current.next;
+  current.next = null;
+  return nodo.value;
+};
+
+/* LinkedList.prototype.search = function (arg) {
+  if (!this.head) return null;
+  if (typeof arg === "function") {
+    // recibi una cb
+    if (arg(this.head.value)) return this.head.value;
+    let current = this.head;
+    while (current) {
+      if (arg(current.value)) return this.head.value;
+      else current = current.next;
+    }
+    // arg(value) nunca le dio true
+    return null;
+  } else {
+    // recibi un valor
+    if (this.head.value === arg) return this.head.value;
+    let current = this.head;
+    while (current) {
+      if (current.value === arg) return current.value;
+      else current = current.next;
+    }
+    // nunca dio true
+    return null;
+  }
+}; */
+LinkedList.prototype.search = function (dato) {
+  let current = this.head;
+  while (current) {
+    if (typeof dato !== "function") {
+      //recibi un valor
+      if (dato === current.value) return current.value;
+    } else {
+      // recibi una callback
+      if (dato(current.value)) return current.value;
+    }
+    current = current.next;
+  }
+  return null;
+};
+
+const objSong = { name: "Flaca", artist: "AC" };
+const objSong2 = { name: "Do hast", artist: "R" };
+const objSong3 = { name: "De musica ligera", artist: "SE" };
+
+const linkedList = new LinkedList();
+console.log(linkedList.add(objSong));
+console.log(linkedList);
+console.log(linkedList.add(objSong2));
+console.log(linkedList);
+console.log(linkedList.add(objSong3));
+console.log(linkedList);
+console.log(linkedList.remove());
+console.log(linkedList);
+console.log(linkedList.remove());
+console.log(linkedList);
+console.log(linkedList.remove());
+console.log(linkedList);
+console.log(linkedList.remove());
+console.log(linkedList);
 
 /* EJERCICIO 2
 Implementar la clase HashTable.
@@ -33,7 +152,7 @@ function HashTable() {}
 // --------------------------------
 
 module.exports = {
-   Node,
-   LinkedList,
-   HashTable,
+  Node,
+  LinkedList,
+  HashTable,
 };
